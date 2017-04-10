@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { map, compose } from 'ramda'
+import { filter,map, compose } from 'ramda'
 import ListItem from '../components/list-item'
 
 
@@ -14,19 +14,25 @@ const recipeToListItemObj = recipe => ({
     linkDescription: 'View Recipe'
   })
 
-
-
-//map(li, recipeToListItemObj(props.recipes))
 const li = li => <ListItem key={li._id} {...li} />
 
-const RecipeList = function (props) {
-console.log("whatt",props)
+const selectedRecipes = (recipe) => {
+  return(
+  recipe.rating === 79
+)}
+
+
+const SelectedRecipeList = function (props) {
+console.log("hello",props)
+console.log("hello1", filter(selectedRecipes, props.recipes))
+
     return (
     <ul className="list">
       {
         compose(
           map(li),
-          map(recipeToListItemObj)
+          map(recipeToListItemObj),
+          filter(selectedRecipes)
         )(props.recipes)
       }
     </ul>
@@ -34,9 +40,8 @@ console.log("whatt",props)
 }
 
 
-
 const connector = connect (state => state )
 
 
 
-export default connector(RecipeList)
+export default connector(SelectedRecipeList)

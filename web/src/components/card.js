@@ -7,7 +7,7 @@ const Card = function (props) {
         <img src={props.imageUrl} className="br-200 h4 w4 dib ba b--black-05 pa2" title="night sky over water" />
         <h1 className="pa2 f5 tl f6-ns mv0">{props.title}</h1>
       </div>
-      <p className="lh-copy measure center f6 black-70">{(props.rating)/20}+'Stars'
+      <p className="lh-copy measure center f6 black-70">{(props.rating)/20}
       </p>
     </article>
   )
@@ -15,7 +15,8 @@ const Card = function (props) {
 
 Card.propTypes = {
   title: React.PropTypes.string,
-  imageUrl: React.PropTypes.string
+  imageUrl: React.PropTypes.string,
+  rating: React.PropTypes.number
 
 }
 

@@ -21,9 +21,9 @@ const Item = ({v, label, image}) => {
 return (
       <div>
         <div className="cf">
-          <Item v=" -Budget " label="Budget" image="https://s3-us-west-2.amazonaws.com/s.cdpn.io/63734/noun_852841_cc.png" />
-          <Item v=" -Fast " label="Fast" image="https://d30y9cdsu7xlg0.cloudfront.net/png/148595-200.png" />
-          <Item v=" -Comfort " label="Comfort" image="https://d30y9cdsu7xlg0.cloudfront.net/png/211984-200.png" />
+          <Item v="budget" label="Budget" image="https://s3-us-west-2.amazonaws.com/s.cdpn.io/63734/noun_852841_cc.png" />
+          <Item v="fast" label="Fast" image="https://d30y9cdsu7xlg0.cloudfront.net/png/148595-200.png" />
+          <Item v="comfort" label="Comfort" image="https://d30y9cdsu7xlg0.cloudfront.net/png/211984-200.png" />
 
         </div>
       </div>
@@ -33,7 +33,7 @@ return (
 }
 
 CatControl.propTypes = {
-  value:  React.PropTypes.string,
+  value:  React.PropTypes.array,
   onChange:  React.PropTypes.func
 }
 

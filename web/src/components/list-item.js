@@ -22,7 +22,7 @@ const ListItem = function (props) {
 ListItem.propTypes = {
   title: React.PropTypes.string,
   imageUrl: React.PropTypes.string,
-  rating: React.PropTypes.num,
+  rating: React.PropTypes.number,
   linkUrl: React.PropTypes.string,
   linkDescription: React.PropTypes.string
 }

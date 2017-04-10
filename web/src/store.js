@@ -16,9 +16,7 @@ const recipeDocuments = [
   "comfort",
   "fast"
 ],
-"cuisine": [
-  "american"
-],
+"cuisine": "american",
 "ingredients": [
 "1 (5 to 7-pound) boston pork butt, bone in",
 "3/4 cup seasoning rub (recommended: butch's smack your lips magic dust"
@@ -27,19 +25,36 @@ const recipeDocuments = [
   "make pork"
 ],
 "rating": 79,
+"comments": [
+{
+  "date": "",
+  "text": "Awesome!",
+  "author": {
+    "name": 'Jenn',
+    "avatarUrl": 'http://placekitten.com/g/64/64'
+  }
+},
+{
+  "date": "",
+  "text": "great!",
+  "author": {
+    "name": 'Lisa',
+    "avatarUrl": 'http://placekitten.com/g/64/64'
+  }
+}
+],
 "type": "recipe"
 },
 {
   "_id": "recipe_pork_burgers_with_herby_chips_6",
 "title": "Pork Burgers With Herby Chips",
+"recipeNumber": "6",
 "imageUrl": "https://www.edamam.com/web-img/d60/d608459a0e23125c50d0c5b234e04d12.jpg",
 "mainIngredient": "Pork",
 "categories": [
   "comfort"
 ],
-"cuisine": [
-  "american"
-],
+"cuisine": "american",
 "ingredients": [
 "3 large baking potatoes , cut into wedges",
 "Burger buns , lettuce and onion, to serve",
@@ -56,19 +71,28 @@ const recipeDocuments = [
   "make pork"
 ],
 "rating": 95,
+"comments": [
+{
+  "date": "",
+  "text": 'I hope you enjoy!',
+  "author": {
+    "name": 'john',
+    "avatarUrl": 'http://placekitten.com/g/64/64'
+  }
+}
+],
 "type": "recipe"
 },
 {
 "_id": "recipe_pork_cutlets_with_couscous_7",
 "title": "Pork Cutlets with Couscous and Sauteed Peppers and Asparagus",
+"recipeNumber": "7",
 "imageUrl": "https://www.edamam.com/web-img/619/619e9b68d4155d6873b38da1dcea630b.jpg",
 "mainIngredient": "Pork",
 "categories": [
-  "comfort"
+  "budget"
 ],
-"cuisine": [
-  "american"
-],
+"cuisine": "italian",
 "ingredients": [
 "1 cup couscous",
 "2 tablespoons extra-virgin olive oil",
@@ -82,10 +106,29 @@ const recipeDocuments = [
   "make pork"
 ],
 "rating": 90,
+"comments": [
+{
+  "date": "",
+  "text": 'so good!',
+  "author": {
+    "name": 'ginger',
+    "avatarUrl": 'http://placekitten.com/g/64/64'
+  }
+}
+],
 "type": "recipe"
 }
 ]
 
+//
+// const comment = {
+//   date: new Date(),
+//   text: 'I hope you enjoy learning React!',
+//   author: {
+//     name: 'Hello Kitty',
+//     avatarUrl: 'http://placekitten.com/g/64/64'
+//   }
+// }
 
 
 
@@ -129,7 +172,7 @@ const recipe = function (recipe={}, action) {
 }
 
 
-const control = (state='', action) => {
+const control = (state=[], action) => {
     switch(action.type) {
         case 'SET_CONTROL':
           return action.payload
