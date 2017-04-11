@@ -48,7 +48,7 @@ const Form = props => {
 
   return (
     <div className='pw4 ph1 mw6-ns center-ns'>
-      {recipes.length === 0 && (
+      {true && (
       <div>
         <h2 className='orange'>STEP 1</h2>
         <CatControl value={props.control} onChange={props.changeCat} />
@@ -69,7 +69,7 @@ const Form = props => {
       </div>
           )}
       <h3>{props.cuisineControl}</h3>
-      {recipes.length > 0 && (
+      {true && (
       <div>
         <h3>Selected Recipes:</h3>
         <ul className='list'>
