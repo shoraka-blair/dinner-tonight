@@ -28,7 +28,6 @@ const CatControl = props => {
   return (
     <div>
       <h3 className='orange'>Select Categories: {props.control}</h3>
-      <p className='f6 fs-italic'>(choose one or more categories)</p>
       <div className='cf'>
         <Item
           v='budget'
@@ -46,6 +45,7 @@ const CatControl = props => {
           image='https://d30y9cdsu7xlg0.cloudfront.net/png/211984-200.png'
         />
       </div>
+      <p className='f6 fs-italic'>(choose one or more categories)</p>
     </div>
   )
 }

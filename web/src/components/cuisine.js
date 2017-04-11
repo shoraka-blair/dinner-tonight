@@ -5,7 +5,6 @@ const CuisineControl = props => {
   return (
     <div>
       <h3 className='orange'>Select Cuisine: {props.cuisineControl}</h3>
-      <p className='f6 fs-italic'>(choose cuisine)</p>
       <div className='cf'>
         <div
           className={`fl w-25 pointer`}
@@ -63,6 +62,7 @@ const CuisineControl = props => {
             <span className='dn db-ns'>Cuban</span>
           </div>
         </div>
+        <p className='f6 fs-italic'>(click on cuisine)</p>
       </div>
     </div>
   )
@@ -70,8 +70,6 @@ const CuisineControl = props => {
 
 // NOTE: include attribution for cuban image in about section
 // https://www.flickr.com/photos/frankfarm/252102667/in/photolist-oh6kH-iSz8N-rra8VM-3Htoa2-9gpkuH-oh64k-5hABqb-3hHJnD-7geHdW-ioHP4d-8pZEpc-4i9oVn-bzEGtM-6Z3WLk-baaLVp-ioHS4n-a5tw6-bzEF8B-3cxAH9-6aePKj-ioHT6T-ioHWFs-5hB7x7-74vbMx-deE3Kv-yor4c-5CVnM6-4i9oJi-kvLYm-5mXppk-7kEjtf-ioHLTJ-4csXtU-ioJsTa-4djVJ8-6fAxQ4-4jdsbx-5G7Ymd-7iPShy-3jjqS9-ioHPQe-ioHM7D-ioJzpB-4NDAhB-4jdsbr-6ksBgy-4wRHBH-4wVSrf-NWzgxq-xDycV
-
-
 CuisineControl.propTypes = {
   value: React.PropTypes.string,
   onChange: React.PropTypes.func
