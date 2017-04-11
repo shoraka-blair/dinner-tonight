@@ -20,7 +20,7 @@ const recipeToListItemObj = recipe => ({
 const li = li => <ListItem key={li._id} {...li} />
 
 const RecipeList = function (props) {
-console.log("whatt",props)
+console.log("whatt",props.recipes)
     return (
     <ul className="list">
       {

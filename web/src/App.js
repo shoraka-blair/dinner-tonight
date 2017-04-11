@@ -22,6 +22,7 @@ class App extends Component {
         <Switch>
         <Route path="/recipes/:id" component={ViewRecipe} />
         <Route path="/recipes" component={RecipeList} />
+        {/*<Route path="/recipes/comments" component={PostComment} />*/}
         </Switch>
       </div>
     </BrowserRouter>

@@ -14,7 +14,8 @@ const recipeDocuments = [
 "mainIngredient": "Pork",
 "categories": [
   "comfort",
-  "fast"
+  "fast",
+  "budget"
 ],
 "cuisine": "american",
 "ingredients": [
@@ -90,7 +91,8 @@ const recipeDocuments = [
 "imageUrl": "https://www.edamam.com/web-img/619/619e9b68d4155d6873b38da1dcea630b.jpg",
 "mainIngredient": "Pork",
 "categories": [
-  "budget"
+  "comfort",
+  "fast"
 ],
 "cuisine": "italian",
 "ingredients": [

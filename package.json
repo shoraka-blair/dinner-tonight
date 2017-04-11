@@ -16,6 +16,9 @@
     "foreman": "^2.0.0"
   },
   "dependencies": {
+    "pouchdb": "^6.1.2",
+    "pouchdb-http": "^6.0.2",
+    "pouchdb-mapreduce": "^6.1.2",
     "ramda": "^0.23.0"
   }
 }

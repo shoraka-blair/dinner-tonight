@@ -4,13 +4,13 @@ import CatControl from '../components/cat-control'
 import CuisineControl from '../components/cuisine'
 import ListItem from '../components/list-item'
 
-import { map, filter, compose, contains } from 'ramda'
+import { map, filter, compose, contains, equals , intersection, allPass} from 'ramda'
 
 
 
 const Form = (props) => {
-console.log("picked!", props)
-console.log("do i have the recipes?", props.control)
+console.log("do i have the recipes?", props)
+console.log("categories", props.recipe)
 
 const recipeToListItemObj = recipe => ({
     _id: recipe._id,
@@ -23,17 +23,19 @@ const recipeToListItemObj = recipe => ({
 
 const li = li => <ListItem key={li._id} {...li} />
 
+//
+// const selectedRecipes = (recipe) => {
+//   return (
+//     (recipe.categories===props.control)
+//
+// )}
 
-const selectedRecipes = (recipe) => {
+console.log("MMMMM", props.cuisineControl)
+
   return (
-    recipe.recipeNumber==="7"
 
-)}
-
-
-  return (
     <div className="pa4">
-      <h3>Select Categories:  {props.control}</h3>
+      <h3 className="pa2">Select Categories:  {props.control}</h3>
         <CatControl
           value={props.control}
           onChange={props.changeCat}
@@ -48,16 +50,18 @@ const selectedRecipes = (recipe) => {
          className="pa2 square"
          onSubmit={props.submit}>submit</button>
       </div>
-      <h3>you chose:{props.control}</h3>
+      <h3>{props.control}</h3>
       <h3>{props.cuisineControl}</h3>
-      <h3>here are your recipes:</h3>
+      <h3>Selected Recipes:</h3>
       <ul className="list">
         {
           compose(
             map(li),
             map(recipeToListItemObj),
-            filter(selectedRecipes)
+            filter(r => r.cuisine === props.cuisineControl),
+            filter(r => intersection(r.categories, props.control).length===props.control.length)
           )(props.recipes)
+
         }
       </ul>
     </div>
@@ -76,7 +80,7 @@ const mapActionsToProps = (dispatch) => ({
     dispatch({type: 'SET_CONTROL', payload: v})
   },
   changeCuisine: v => {
-    dispatch({type: 'SET_CUISINE_CONTROL', payload: 'american'})
+    dispatch({type: 'SET_CUISINE_CONTROL', payload: v})
   },
   getRecipes: recipe => {
     dispatch({type: 'INIT_RECIPES', payload: recipe})

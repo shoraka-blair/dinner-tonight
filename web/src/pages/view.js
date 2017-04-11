@@ -36,7 +36,8 @@ console.log("XXXXXX", recipe.comments)
         </div>
         <hr />
 
-        <h4>Comments:</h4>
+        <h4>Reviews</h4>
+        <a class="see-all" href="/recipes/comments">Write Review</a>
         <ul>
         {map((comment) =>
               <li className="flex items-center lh-copy ph0-l bb b--black-10">
