@@ -7,26 +7,19 @@ import fetch from 'isomorphic-fetch'
 import { connect } from 'react-redux'
 import { pathOr } from 'ramda'
 
-const postWidget = (widget) => fetch('http://localhost:5000/recipes/comments', {
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  method: 'POST',
-  body: JSON.stringify(comment)
-})
 
-const getWidget = (id) => fetch('http://localhost:5000/widgets/' + id)
-const putWidget = (widget) => fetch('http://localhost:5000/widgets/' + widget.id, {
+const getWidget = (id) => fetch('http://localhost:8082/recipes/' + id)
+const putComment = (recipe) => fetch('http://localhost:8082/recipes/' + recipe.id, {
   headers: {
     'Content-Type': 'application/json'
   },
   method: 'put',
-  body: JSON.stringify(widget)
+  body: JSON.stringify(recipe)
 })
 
 
 //const WidgetForm = (props) => {
-class WidgetForm extends React.Component {
+class CommentForm extends React.Component {
   componentDidMount() {
     if (this.props.match.params.id) {
       getWidget(this.props.match.params.id)

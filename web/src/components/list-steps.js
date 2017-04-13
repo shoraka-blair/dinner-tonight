@@ -38,149 +38,236 @@ filter(x=> contains(props.control, x.categories))
 filter(r => intersection(r.categories, props.control).length > 0)
 
 
+import React from 'react'
+import { equals } from 'ramda'
+import Panel from '../components/job-panel'
+import { connect } from 'react-redux'
+import fetch from 'isomorphic-fetch'
+import InputField from '../components/input-field'
+import RangeField from '../components/range-field'
+import PayInput from '../components/payment-input'
+import PhoneInput from '../components/phone-input'
+import JobType from '../components/jobtype-input'
+const moment = require('moment')
 
-const recipes = [
-{
-"label": "Easy Roast Chicken with Asparagus and Leeks",
-"image": "https://www.edamam.com/web-img/2d2/2d2df477b921590db3649c54144d35a7.jpg",
-"source": "Serious Eats",
-"url": "http://www.seriouseats.com/recipes/2011/06/easy-roast-chicken-with-asparagus-and-leeks-recipe.html",
-"ingredientLines": [
-"1 whole butterflied chicken (about 4 pounds, see note), neck and backbone reserved",
-"Kosher salt and freshly ground black pepper",
-"4 large leeks, whites and greens reserved separately, whites trimmed, washed, and split in half lengthwise",
-"2 bay leaves",
-"1 1/2 pounds asparagus stalks, trimmed and peeled if necessary",
-"2 tablespoons olive oil"
-]
-},
-{
-"label": "Spatchcocked Chicken with Chickpeas",
-"image": "https://www.edamam.com/web-img/4fd/4fdb447fb86295b4d22bbaf6d735d25a.jpg",
-"source": "Martha Stewart",
-"url": "http://www.marthastewart.com/340958/spatchcocked-chicken-with-chickpeas",
-"ingredientLines": [
-"1 spatchcocked chicken",
-"Coarse salt and ground pepper",
-"1 can (15.5 ounces) chickpeas, rinsed and drained",
-"Fresh lime juice (for serving)",
-"Fresh cilantro leaves (for serving)"
-]
-},
-{
-"label": "Roast Chicken",
-"image": "https://www.edamam.com/web-img/c24/c24a86f98a8cc1f13f795bdba2dae614.jpg",
-"source": "Epicurious",
-"url": "http://www.epicurious.com/recipes/food/views/Roast-Chicken-394676",
-"ingredientLines": [
-"1 tablespoon kosher salt",
-"1 whole 4-pound chicken, giblets reserved for another use",
-"1/4 cup (1/2 stick) unsalted butter, melted"
-]
-},
-{
-"label": "Maple-Thyme Roast Chicken",
-"image": "https://www.edamam.com/web-img/393/393de4bf9c222d3e888d85d6ad696596.jpg",
-"source": "Fine Cooking",
-"url": "http://www.finecooking.com/recipes/maple-thyme-roast-chicken.aspx",
-"ingredientLines": [
-"1/8 tsp. cayenne",
-"Kosher salt and freshly ground black pepper",
-"Fresh whole chicken crazy split whole chicken leg 4-lb. whole chicken, rinsed and patted dry",
-"1/3 cup pure maple syrup",
-"1 tbs. chopped fresh thyme",
-"2 tbs. vegetable oil",
-"2 tbs. balsamic vinegar"
-]
-},
-{
-"label": "Roast Chicken with Caramelized Shallots",
-"image": "https://www.edamam.com/web-img/3d4/3d44eb1f6d04b5fbf25223da997647d3.jpg",
-"source": "David Lebovitz",
-"url": "http://www.davidlebovitz.com/roast-chicken-recipe-caramelized-s/",
-"ingredientLines": [
-"3 tablespoons olive oil",
-"3 tablespoons red wine vinegar",
-"1 tablespoon soy sauce",
-"4 large shallots, peeled and minced",
-"Sea salt and freshly ground black pepper",
-"One whole chicken, cut into 8 pieces",
-"One generous handful of coarsely chopped flat-leaf parsley"
-]
-},
-{
-"label": "Poached Salmon with Leeks",
-"image": "https://www.edamam.com/web-img/d84/d8497475cac1ec1bf10312d19a478471.jpg",
-"source": "Food52",
-"url": "https://food52.com/recipes/2626-poached-salmon-with-leeks",
-"ingredientLines": [
-"1 tablespoon butter or olive oil",
-"4 cups chopped leeks, well-rinsed!",
-"1 cup chicken broth",
-"14-16 ounces salmon (about 6-8 oz. per person)"
-]
-},
-{
-"label": "Grilled Salmon With Miso Glaze",
-"image": "https://www.edamam.com/web-img/1ef/1efa97c17a910e430d048d2671d14433.JPG",
-"source": "Serious Eats",
-"url": "http://www.seriouseats.com/recipes/2011/11/grilled-salmon-with-miso-glaze-recipe.html",
-"ingredientLines": [
-"4 1/2-pound salmon fillets, center cut",
-"3 tablespoons mirin",
-"3 tablespoons unseasoned rice vinegar",
-"1/2 cup white or yellow miso",
-"1 1/2 teaspoons sesame oil",
-"3 tablespoons minced fresh ginger",
-"1 bunch scallions, chopped",
-"2 limes"
-]
-},
-{
-"label": "Salmon with Puff Pastry and Pesto",
-"image": "https://www.edamam.com/web-img/4d8/4d85de63fd008638ac5b93f4067859a1.jpg",
-"source": "Cooking Channel",
-"url": "http://www.cookingchanneltv.com/recipes/salmon-with-puff-pastry-and-pesto.html",
-"ingredientLines": [
-"4 pieces of purchased puff pastry, each cut to be just larger than a piece of salmon",
-"4 (4 to 6-ounce) pieces salmon",
-"1/4 cup sliced almonds",
-"1/4 cup purchased pesto",
-"2 tomatoes, sliced"
-]
-},
-{
-"label": "Salmon and sea bass ceviche",
-"image": "https://www.edamam.com/web-img/0c5/0c5caf4775fec34d361c65cc272b357a.jpg",
-"source": "BBC",
-"url": "http://www.bbc.co.uk/food/recipes/salmon_and_sea_bass_14216",
-"ingredientLines": [
-"500g/1lb 2oz skinless salmon fillets, flesh sliced as thinly as possible using a sharp knife",
-"2 medium skinless sea bass fillets, flesh sliced as thinly as possible using a sharp knife",
-"1 red onion, peeled, thinly sliced",
-"2 large red chillies, stalks and seeds removed, thinly sliced",
-"1 red pepper, stalk and seeds removed, flesh finely diced",
-"5 limes, juice and zest, plus extra lime wedges to serve",
-"Pinch cayenne pepper",
-"4 tbsp extra virgin olive oil, plus extra to serve",
-"Handful fresh coriander leaves",
-"2 ripe avocados, peeled, stone removed, cut into thin slices",
-"Handful mixed baby salad leaves"
-]
-},
-{
-"label": "Salmon and Zucchini Baked in Parchment",
-"image": "https://www.edamam.com/web-img/f88/f88029c136577bb604dc6b1823733033.jpg",
-"source": "Martha Stewart",
-"url": "http://www.marthastewart.com/318914/salmon-and-zucchini-baked-in-parchment",
-"ingredientLines": [
-"1 small zucchini, halved lengthwise and thinly sliced",
-"1 shallot, thinly sliced",
-"1 tablespoon butter, cut into pieces",
-"1/4 teaspoon dried dill weed",
-"1 lemon slice, halved, plus 2 teaspoons fresh lemon juice",
-"Coarse salt and ground pepper",
-"1 skinless salmon fillet (6 to 8 ounces)"
-]
+
+const postJob = (job) => {
+   return fetch(`http://localhost:9000/jobs`, {
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "POST",
+    body: JSON.stringify(job)
+  })
 }
-]
+
+const JobForm = (props) => {
+  return (
+
+    <div className="pa4">
+
+    {/*JOB TYPE - PAGE 1*/}
+    {equals(props.panel, 'step1') && (
+    <Panel title='Job Type'
+      onNext={e => props.next('step2')}
+      progress={0}
+      status="active"
+    >
+    <InputField label='Title'
+      type="text"
+      help='please provide a short one to two word descriptive name for your job'
+      onChange={props.onChangeTitle}
+    />
+
+    <div className="f6 b db mb2">Job Type: {props.job.jobType}</div>
+    <JobType
+       onChange={props.onChangeJobType}
+       value={props.job.jobType}
+    />
+    </Panel>
+    )}
+
+    {/* DATE AND TIME - PAGE 2*/}
+    {equals(props.panel, 'step2') && (
+    <Panel title='Date and Time'
+      onNext={e => props.next('step3')}
+      onPrevious={e => props.previous('step1')}
+      progress={20}
+      status="active"
+    >
+    <InputField label="Date"
+      type="date"
+      onChange={props.onChangeDate}
+      min={moment().format('YYYY-MM-DD')}
+    />
+    <InputField label="Start Time"
+      type="time"
+      onChange={props.onChangeStartTime}
+    />
+    <InputField label="End Time"
+      type="time"
+      onChange={props.onChangeEndTime}
+    />
+    </Panel>
+    )}
+
+    {/* JOB DETAILS - PAGE 3 */}
+    {equals(props.panel, 'step3') && (
+    <Panel title='Job Details'
+      onNext={e => props.next('step4')}
+      onPrevious={e => props.previous('step2')}
+      progress={40}
+      status="active"
+    >
+
+    <RangeField label="People needed to complete job:"
+      maxValue={20}
+      minValue={0}
+      value={props.job.persons}
+      onChange={props.onChangePersons}
+
+    />
+
+    <div className="f6 b db mb2">Pay: ${props.job.paymentAmount}</div>
+    <small className="measure black-60 f6 b db mb2">(How much each person will recieve upon completion of job)</small>
+    <PayInput
+      onChange={props.onChangePaymentAmount}
+      value={props.job.paymentAmount}
+    />
+
+    <InputField label="Description:"
+      type="textarea"
+      help="Please list any additional important information, if the job is attended for mission trip fundraising please specify"
+      onChange={props.onChangeDesc}
+    />
+    </Panel>
+    )}
+
+    {/* JOB LOCATION - PAGE 4 */}
+    {equals(props.panel, 'step4') && (
+    <Panel title="Location"
+      onNext={e => props.next('step5')}
+      onPrevious={e => props.previous('step3')}
+      progress={60}
+      status="active">
+    <InputField label="Address"
+      type="text"
+      help="street address"
+      onChange={props.onChangeAddress}
+    />
+    <InputField label="City"
+      type="text"
+      onChange={props.onChangeCity}
+    />
+    <InputField label="Zip"
+      type="text"
+      onChange={props.onChangeZip}
+    />
+    </Panel>
+    )}
+
+    {equals(props.panel, 'step5') && (
+    <Panel title="Employer Contact Information"
+      onNext={e => props.next('step6')}
+      onPrevious={e => props.previous('step4')}
+      progress={80}
+      status="active">
+      <InputField label="First Name"
+        type="text"
+        help="first name of employer"
+        onChange={props.onChangeFirstName}
+      />
+      <InputField label="Last Name"
+        type="text"
+        help="last name of employer"
+        onChange={props.onChangeLastName}
+      />
+      <PhoneInput label="Phone Number"
+        value={props.job.phoneNum}
+        onChange={props.onChangePhoneNum}
+      />
+      </Panel>
+      )}
+
+    {equals(props.panel, 'step6') && (
+    <Panel
+      onSubmit={props.submit(props.job, props.history)}
+      onPrevious={e => props.previous('step5')}
+      progress={100}
+      status="success">
+      <div className="f1 fw1 f-headline-m tc mt6">You're all done, press submit below to post your job!</div>
+      </Panel>
+    )}
+    </div>
+  )
+}
+const mapStateToProps = (state) => {
+  return state
+}
+const mapActionsToProps = (dispatch) => {
+  return {
+    submit: (job, history) => (e) => {
+      e.preventDefault()
+      postJob(job)
+        .then(job => job.json())
+        .then(job => {
+          if (job.id) {
+            dispatch({type: 'CLEAR_BUZZWORD'})
+            history.push('/jobs')
+          } else {
+            alert('Could not save to the database')
+          }
+        })
+        .catch(err => console.log(err.message))
+    },
+    onChangeTitle: e => {
+      dispatch({type: 'CHANGE_TITLE', payload: e.target.value})
+    },
+    onDateChange: e => {
+      dispatch({type: 'CHANGE_DATE', payload: e.target.value})
+    },
+    onChangeDate: e => {
+      dispatch({type: 'CHANGE_DATE', payload: e.target.value})
+    },
+    onChangeStartTime: e => {
+      dispatch({type: 'CHANGE_ST', payload: e.target.value})
+    },
+    onChangeEndTime: e => {
+      dispatch({type: 'CHANGE_ET', payload: e.target.value})
+    },
+    onChangePersons: value => {
+      dispatch({type: 'CHANGE_PERS', payload: value})
+    },
+    onChangePaymentAmount: e => {
+       dispatch({type: 'CHANGE_PAY', payload: e})
+    },
+    onChangeJobType: e => {
+       dispatch({type: 'CHANGE_TYPE', payload: e})
+    },
+    onChangeDesc: e => {
+      dispatch({type: 'CHANGE_DESC', payload: e.target.value})
+    },
+    onChangeAddress: e => {
+      dispatch({type: 'CHANGE_ADR', payload: e.target.value})
+    },
+    onChangeCity: e => {
+      dispatch({type: 'CHANGE_CITY', payload: e.target.value})
+    },
+    onChangeZip: e => {
+      dispatch({type: 'CHANGE_ZIP', payload: e.target.value})
+    },
+    onChangeFirstName: e => {
+      dispatch({type: 'CHANGE_FIRST', payload: e.target.value})
+    },
+    onChangeLastName: e => {
+      dispatch({type: 'CHANGE_LAST', payload: e.target.value})
+    },
+    onChangePhoneNum: phone => {
+      dispatch({type: 'CHANGE_PHONE', payload: phone})
+    },
+    next: panel => dispatch({ type: 'NEXT', payload: panel }),
+    previous: panel => dispatch({ type: 'PREVIOUS', payload: panel })
+  }
+}
+const connector = connect(mapStateToProps, mapActionsToProps)
+export default connector(JobForm)

@@ -7,6 +7,8 @@ import React from 'react'
 //   return date.toLocaleDateString();
 // }
 
+
+
 const Comment = function (props) {
   return (
     <div className="Comment">

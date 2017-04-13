@@ -16,6 +16,8 @@ const ViewRecipe = (props) => {
   const recipe = find(propEq('_id', props.match.params.id), props.recipes)
   console.log("XXXXXX", recipe.comments)
 
+
+
       return (
         <div>
           <Card
@@ -37,7 +39,6 @@ const ViewRecipe = (props) => {
           <hr />
 
           <h4>Reviews</h4>
-          <a class="see-all" href="/recipes/comments">Write Review</a>
           <ul>
           {map((comment) =>
                 <li className="flex items-center lh-copy ph0-l bb b--black-10">
@@ -48,6 +49,8 @@ const ViewRecipe = (props) => {
                 imageUrl={comment.author.avatarUrl} /></li>, recipe.comments)
             }
           </ul>
+          <a class="see-all" href="/recipes/comments">Write Review</a>
+
         </div>
       )
     }

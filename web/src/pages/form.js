@@ -14,37 +14,42 @@ import {
   allPass
 } from 'ramda'
 
-const Form = props => {
-  console.log('do i have the recipes?', props)
-  console.log('categories', props.recipe)
 
-  const recipeToListItemObj = recipe => ({
-    _id: recipe._id,
-    title: recipe.title,
-    imageUrl: recipe.imageUrl,
-    rating: recipe.rating,
-    linkUrl: '/recipes/' + recipe._id,
-    linkDescription: 'View Recipe'
-  })
 
-  const li = li => <ListItem key={li._id} {...li} />
 
-  //
-  // const selectedRecipes = (recipe) => {
-  //   return (
-  //     (recipe.categories===props.control)
-  //
-  // )}
-  console.log('MMMMM', props.cuisineControl)
-  const recipes = compose(
-    map(recipeToListItemObj),
-    filter(r => r.cuisine === props.cuisineControl),
-    filter(
-      r =>
-        intersection(r.categories, props.control).length ===
-          props.control.length
-    )
-  )(props.recipes)
+class Form extends React.Component {
+
+    componentDidMount() {
+        console.log('about to fetch')
+          fetch(`http://localhost:8082/recipes`)
+            .then(res => res.json())
+      //      .then(res => filter(x => x.persons > 0, res))
+            .then(recipes => this.props.setRecipes(recipes))
+        }
+
+  render() {
+
+    const recipeToListItemObj = recipe => ({
+      _id: recipe._id,
+      title: recipe.title,
+      imageUrl: recipe.imageUrl,
+      rating: recipe.rating,
+      linkUrl: '/recipes/' + recipe._id,
+      linkDescription: 'View Recipe'
+    })
+
+    const li = li => <ListItem key={li._id} {...li} />
+
+    const props = this.props
+
+    const recipes = compose(
+        map(recipeToListItemObj),
+        filter(r => r.cuisine === props.cuisineControl),
+        filter(
+            r =>
+            intersection(r.categories, props.control).length === props.control.length)
+          )(props.recipes)
+
 
   return (
     <div className='pw4 ph1 mw6-ns center-ns'>
@@ -68,7 +73,6 @@ const Form = props => {
         </div>
       </div>
           )}
-      <h3>{props.cuisineControl}</h3>
 
       {true && (
       <div>
@@ -81,6 +85,9 @@ const Form = props => {
     </div>
   )
 }
+}
+
+
 const mapStateToProps = state => state
 
 const mapActionsToProps = dispatch => ({
