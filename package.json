@@ -1,5 +1,5 @@
 {
-  "name": "basic-crud",
+  "name": "dinner-tonight",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -16,6 +16,10 @@
     "foreman": "^2.0.0"
   },
   "dependencies": {
+    "body-parser": "^1.17.1",
+    "cors": "^2.8.3",
+    "express": "^4.15.2",
+    "node-http-error": "^1.1.0",
     "pouchdb": "^6.1.2",
     "pouchdb-http": "^6.0.2",
     "pouchdb-mapreduce": "^6.1.2",

@@ -155,14 +155,18 @@ const recipeDocuments = [
 
 
 
-const recipes = (state= recipeDocuments, action) => {
+const recipes = (state= [], action) => {
+  console.log("XXXXX",action.payload)
       switch(action.type) {
         case 'SET_RECIPES':
+        console.log("XXXXX",action.payload)
+
           return action.payload
         default:
           return state
       }
     }
+
 const recipe = function (recipe={}, action) {
   switch (action.type) {
     case "SET_RECIPE":
@@ -192,7 +196,6 @@ const cuisineControl = (state='', action) => {
           return state
       }
     }
-
 const store = createStore(
   combineReducers({
     recipes,
@@ -201,5 +204,6 @@ const store = createStore(
     cuisineControl
   })
 )
+
 
 export default store

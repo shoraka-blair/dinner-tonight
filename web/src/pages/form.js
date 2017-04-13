@@ -3,14 +3,10 @@ import { connect } from 'react-redux'
 import CatControl from '../components/cat-control'
 import CuisineControl from '../components/cuisine'
 import ListItem from '../components/list-item'
+import fetch from 'isomorphic-fetch'
+
 
 import { map, filter, compose, contains, equals , intersection, allPass} from 'ramda'
-
-
-
-const Form = (props) => {
-console.log("do i have the recipes?", props)
-console.log("categories", props.recipe)
 
 const recipeToListItemObj = recipe => ({
     _id: recipe._id,
@@ -23,14 +19,25 @@ const recipeToListItemObj = recipe => ({
 
 const li = li => <ListItem key={li._id} {...li} />
 
-//
-// const selectedRecipes = (recipe) => {
-//   return (
-//     (recipe.categories===props.control)
-//
-// )}
 
-console.log("MMMMM", props.cuisineControl)
+class Form extends React.Component {
+
+    componentDidMount() {
+      console.log('about to fetch')
+        fetch(`http://localhost:8082/recipes`)
+          .then(res => res.json())
+    //      .then(res => filter(x => x.persons > 0, res))
+          .then(recipes => this.props.setRecipes(recipes))
+      }
+
+    render() {
+      const props=this.props
+
+
+
+console.log("do i have the recipes?", props)
+console.log("categories", props.control, props.cuisineControl)
+
 
   return (
 
@@ -59,7 +66,7 @@ console.log("MMMMM", props.cuisineControl)
             map(li),
             map(recipeToListItemObj),
             filter(r => r.cuisine === props.cuisineControl),
-            filter(r => intersection(r.categories, props.control).length===props.control.length)
+            filter(r => intersection(r.categories, props.control).length === props.control.length)
           )(props.recipes)
 
         }
@@ -69,9 +76,10 @@ console.log("MMMMM", props.cuisineControl)
     )
 
 }
-
+}
 
 const mapStateToProps = (state) => (state)
+
 
 
 const mapActionsToProps = (dispatch) => ({
@@ -82,12 +90,17 @@ const mapActionsToProps = (dispatch) => ({
   changeCuisine: v => {
     dispatch({type: 'SET_CUISINE_CONTROL', payload: v})
   },
-  getRecipes: recipe => {
-    dispatch({type: 'INIT_RECIPES', payload: recipe})
+  setRecipes: recipes => {
+    dispatch ({
+      type: 'SET_RECIPES', payload: recipes
+    })
   }
+  /*getRecipes: recipe => {
+    dispatch({type: 'INIT_RECIPES', payload: recipe})
+  }*/
 
 })
 
-const connector = connect (mapStateToProps, mapActionsToProps)
+const connector = connect(mapStateToProps, mapActionsToProps)
 
 export default connector(Form)

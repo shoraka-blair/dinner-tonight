@@ -4,7 +4,6 @@ import { map, compose } from 'ramda'
 import ListItem from '../components/list-item'
 
 
-
 const recipeToListItemObj = recipe => ({
     _id: recipe._id,
     title: recipe.title,
@@ -14,14 +13,17 @@ const recipeToListItemObj = recipe => ({
     linkDescription: 'View Recipe'
   })
 
+  const li = li => <ListItem key={li.id} {...li} />
+
+
 
 
 //map(li, recipeToListItemObj(props.recipes))
-const li = li => <ListItem key={li._id} {...li} />
 
-const RecipeList = function (props) {
-console.log("whatt",props.recipes)
-    return (
+const RecipeList = (props) => {
+console.log("Do I have the recipes?", props.recipes)
+  return (
+  <div>
     <ul className="list">
       {
         compose(
@@ -30,13 +32,19 @@ console.log("whatt",props.recipes)
         )(props.recipes)
       }
     </ul>
+  </div>
   )
 }
 
 
 
-const connector = connect (state => state )
 
+
+const mapStateToProps = (state) => (state)
+
+
+
+const connector = connect(mapStateToProps)
 
 
 export default connector(RecipeList)
