@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 
-const { getRecipes} = require('./dal.js')
+const { getRecipes, getRecipe, updateRecipe } = require('./dal.js')
 const { split } = require('ramda')
 
 const bodyParser = require('body-parser')
@@ -33,19 +33,19 @@ app.get('/recipes', function(req, res, next) {
 //     })
 // })
 //
-// app.put('/medications/:id', function(req, res, next) {
-//     updateMed(req.body, function(err, dalResponse) {
-//         if (err) return next(new HTTPError(err.status, err.messsge, err))
-//         res.status(200).send(dalResponse)
-//     })
-// })
+app.put('/recipes/:id', function(req, res, next) {
+    updateRecipe(req.body, function(err, dalResponse) {
+        if (err) return next(new HTTPError(err.status, err.messsge, err))
+        res.status(200).send(dalResponse)
+    })
+})
 //
-// app.get('/medications/:id', function(req, res, next) {
-//     getMed(req.params.id, function(err, dalResponse) {
-//         if (err) return next(new HTTPError(err.status, err.message, err))
-//         res.status(200).send(dalResponse)
-//     })
-// })
+app.get('/recipes/:id', function(req, res, next) {
+    getRecipe(req.params.id, function(err, dalResponse) {
+        if (err) return next(new HTTPError(err.status, err.message, err))
+        res.status(200).send(dalResponse)
+    })
+})
 //
 // app.delete('/medications/:id', function(req, res, next) {
 //     deleteMed(req.params.id, function(err, dalResponse) {

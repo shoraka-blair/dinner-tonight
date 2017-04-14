@@ -65,7 +65,7 @@ class Form extends React.Component {
         <h2 className='orange'>STEP 3</h2>
         <div className='mt2'>
           <button
-            className='pa3 f3 w-100 square bg-orange white-80'
+            className='pa3 f3 w-100 square bg-light-orange white-80'
             onSubmit={props.submit}
                 >
                   Find Dinner
@@ -88,9 +88,11 @@ class Form extends React.Component {
 }
 
 
-const mapStateToProps = state => state
-
-const mapActionsToProps = dispatch => ({
+const mapStateToProps = (state) => {
+  return state
+}
+const mapActionsToProps = (dispatch) => {
+  return {
   changeCat: v => {
     dispatch({ type: 'SET_CONTROL', payload: v })
   },
@@ -103,6 +105,7 @@ const mapActionsToProps = dispatch => ({
       type: 'SET_RECIPES', payload: recipes
     })
   }
+}
   /*getRecipes: recipe => {
     dispatch({type: 'INIT_RECIPES', payload: recipe})
   }*/
@@ -110,7 +113,7 @@ const mapActionsToProps = dispatch => ({
   // getRecipes: recipe => {
     // dispatch({ type: 'INIT_RECIPES', payload: recipe })
   // }
- })
+ }
 
 const connector = connect(mapStateToProps, mapActionsToProps)
 

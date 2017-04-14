@@ -17,12 +17,12 @@ const {
 //   medications
 /////////////////////
 
-// function getMed(medId, cb) {
-//     db.get(medId, function(err, doc) {
-//         if (err) return cb(err)
-//         cb(null, doc)
-//     })
-// }
+function getRecipe(recipeId, cb) {
+    db.get(recipeId, function(err, doc) {
+        if (err) return cb(err)
+        cb(null, doc)
+    })
+}
 //
 // function addMed(med, cb) {
 //     med.type = "medication"
@@ -42,13 +42,13 @@ const {
 //     })
 // }
 //
-// function updateMed(med, cb) {
-//     db.put(med, function(err, doc) {
-//         if (err) return cb(err)
-//         cb(null, doc)
-//     })
-// }
-//
+function updateRecipe(recipe, cb) {
+    db.put(recipe, function(err, doc) {
+        if (err) return cb(err)
+        cb(null, doc)
+    })
+}
+
 // function deleteMed(id, cb) {
 //     db.get(id, function(err, doc) {
 //         if (err) return cb(err)
@@ -359,8 +359,9 @@ const returnDoc = row => row.doc
 
 
 const dal = {
-    getRecipes: getRecipes
-    // addPharmacy: addPharmacy,
+    getRecipes: getRecipes,
+    updateRecipe: updateRecipe,
+    getRecipe: getRecipe
     // updatePharmacy: updatePharmacy,
     // getPharmacy: getPharmacy,
     // listPharmacies: listPharmacies,
