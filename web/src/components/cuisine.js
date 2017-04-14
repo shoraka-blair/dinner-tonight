@@ -13,7 +13,7 @@ const CuisineControl = props => {
           <div
             className={
               `mr1 pa2 ba tc br1 ${equals(props.value, 'american') &&
-                'bg-orange white b--orange'}`
+                'bg-light-silver white b--orange'}`
             }
           >
             <img src='/images/burger-fries.jpg' />
@@ -27,7 +27,7 @@ const CuisineControl = props => {
           <div
             className={
               `mr1 pa2 ba tc br1 ${equals(props.value, 'italian') &&
-                'bg-orange white b--orange'}`
+                'bg-light-silver white b--orange'}`
             }
           >
             <img src='/images/italian.jpg' />
@@ -41,7 +41,7 @@ const CuisineControl = props => {
           <div
             className={
               `mr1 pa2 ba tc br1 ${equals(props.value, 'chinese') &&
-                'bg-orange white b--orange'}`
+                'bg-light-silver white b--orange'}`
             }
           >
             <img src='/images/chinese.jpg' />
@@ -55,7 +55,7 @@ const CuisineControl = props => {
           <div
             className={
               `mr1 pa2 ba tc br1 ${equals(props.value, 'cuban') &&
-                'bg-orange white b--orange'}`
+                'bg-light-silver white b--orange'}`
             }
           >
             <img src='/images/cuban.jpg' />

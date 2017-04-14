@@ -1,6 +1,6 @@
 import React from 'react'
   import { connect } from 'react-redux'
-import { map, find, propEq, compose, pathOr } from 'ramda'
+import { map, find, propEq, compose, pathOr, append, insert, push } from 'ramda'
 import Card from '../components/card'
 import Comment from '../components/comment'
 import TextField from '../components/text-field'
@@ -12,7 +12,7 @@ const putRecipe = (recipe) => fetch('http://localhost:8082/recipes/' + recipe._i
   headers: {
     'Content-Type': 'application/json'
   },
-  method: 'put',
+  method: 'PUT',
   body: JSON.stringify(recipe)
 })
 
@@ -63,20 +63,26 @@ console.log('this is the recipe!!!', props)
                 <Comment
                 date={comment.date}
                 text={comment.text}
-                name={comment.author.name}
-                imageUrl={comment.author.avatarUrl} /></li>, props.recipe.comments)
+                name={comment.name}
+                /></li>, props.recipe.comments)
             }
           </ul>
           <div>
             <h2>Write Review</h2>
-            <form onSubmit={this.props.submit(props.history, props.recipe)}>
+            <form onSubmit={props.submit(props.recipe, props.comment, props.history)}>
               <TextField
                 label="Name"
-                onChange={this.props.changeName}
+                onChange={props.changeName}
                 optional={false}
               />
+              <TextField
+                label="Review"
+                onChange={props.changeComment}
+                optional={false}
+              />
+
               <BasicButton
-                backgroundColor="light-orange"
+                backgroundColor="light-silver"
                 color="white-80"
               >Post Review</BasicButton>
               <a className="link" href="#" onClick={e => props.history.goBack() }>Cancel</a>
@@ -98,21 +104,27 @@ const mapActionsToProps = (dispatch) => {
       type: 'SET_RECIPE', payload: recipe
     })
   },
-  changeName: (e) => dispatch({ type: 'SET_RECIPE_NAME', payload: e.target.value }),
-  submit: (history, recipe) => (e) => {
+  changeName: (e) => {
+    dispatch({ type: 'SET_COMMENT_NAME', payload: e.target.value })
+  },
+  changeComment: (e) => {
+    dispatch({ type: 'SET_COMMENT_TEXT', payload: e.target.value })
+  },
+  submit: (recipe, comment, history) => (e) => {
       e.preventDefault()
+        console.log(comment)
+        console.log('updated comment', append(comment, recipe.comments))
         // update or putWidget
+        recipe.comments = append(comment, recipe.comments)
         putRecipe(recipe)
           .then(res => res.json()).then(res => {
             // clear our widget memory from store
             dispatch({ type: 'CLEAR_RECIPE'})
             // navigate to a list view
-            history.push('/recipes/')
+            history.push('/')
           }).catch(err => console.log(err.message))
       }
 }
-
-
 
 }
 

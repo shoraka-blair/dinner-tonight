@@ -16,7 +16,7 @@ const CatControl = props => {
         <div
           className={
             `ba br2 pa1 ${contains(v, props.value) &&
-              'bg-orange white b--black'}`
+              'bg-light-silver white b--black'}`
           }
         >
           <img src={image} />

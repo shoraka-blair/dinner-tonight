@@ -62,21 +62,12 @@ class Form extends React.Component {
           value={props.cuisineControl}
           onChange={props.changeCuisine}
               />
-        <h2 className='orange'>STEP 3</h2>
-        <div className='mt2'>
-          <button
-            className='pa3 f3 w-100 square bg-light-orange white-80'
-            onSubmit={props.submit}
-                >
-                  Find Dinner
-                </button>
-        </div>
       </div>
           )}
 
       {true && (
       <div>
-        <h3>Selected Recipes:</h3>
+      <h2 className='orange'>SELECTED RECIPES:</h2>
         <ul className='list'>
           {map(li, recipes)}
         </ul>

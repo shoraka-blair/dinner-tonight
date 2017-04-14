@@ -1,5 +1,5 @@
 import {createStore, combineReducers } from 'redux'
-import { set, lensProp, insert } from 'ramda'
+import { set, lensProp, insert, append, pathOr } from 'ramda'
 
 // const {
     // map
@@ -50,13 +50,16 @@ const initialRecipeState = {
   type: ''
   }
 
+const initialCommentState = {
+      "text": ''
+}
+
 
 
 const recipes = (state= [], action) => {
   console.log("XXXXX",action.payload)
       switch(action.type) {
         case 'SET_RECIPES':
-        console.log("XX",action.payload)
           return action.payload
         default:
           return state
@@ -68,9 +71,20 @@ const recipe = (state=initialRecipeState, action) => {
     case 'SET_RECIPE':
     console.log('*****', action.payload)
       return action.payload
-    case 'SET_RECIPE_NAME':
-      return set(lensProp('name'), action.payload, state)
     case 'CLEAR_RECIPE':
+      return {}
+    default:
+    return state
+  }
+}
+
+const comment = (state=initialCommentState, action) => {
+  switch (action.type) {
+    case 'SET_COMMENT_NAME':
+      return set(lensProp('name'), action.payload, state)
+    case 'SET_COMMENT_TEXT':
+      return set(lensProp('text'), action.payload, state)
+    case 'CLEAR_COMMENT':
       return {}
     default:
     return state
@@ -100,6 +114,7 @@ const store = createStore(
   combineReducers({
     recipes: recipes,
     recipe: recipe,
+    comment: comment,
     control: control,
     cuisineControl: cuisineControl
   })
