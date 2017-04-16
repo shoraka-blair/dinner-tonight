@@ -44,7 +44,7 @@ const CuisineControl = props => {
                 'bg-light-silver white b--orange'}`
             }
           >
-            <img src='/images/chinese.jpg' />
+            <img src='/images/chinese1.jpg' />
             <span className='dn db-ns'>Chinese</span>
           </div>
         </div>

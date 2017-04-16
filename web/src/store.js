@@ -51,9 +51,13 @@ const initialRecipeState = {
   }
 
 const initialCommentState = {
+      "name": '',
       "text": ''
 }
 
+// const initialRatingState = {
+//       "rating": ''
+// }
 
 
 const recipes = (state= [], action) => {
@@ -90,6 +94,17 @@ const comment = (state=initialCommentState, action) => {
     return state
   }
 }
+
+// const rating = (state=initialRatingState, action) => {
+//   switch (action.type) {
+//     case 'SET_RATING':
+//       return set(lensProp('rating'), action.payload, state)
+//     case 'CLEAR_RATING':
+//       return {}
+//     default:
+//       return state
+//   }
+// }
 
 
 const control = (state=[], action) => {

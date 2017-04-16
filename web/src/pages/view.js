@@ -122,7 +122,7 @@ const mapActionsToProps = (dispatch) => {
             dispatch({ type: 'CLEAR_RECIPE'})
             // navigate to a list view
             history.push('/')
-          }).catch(err => console.log(err.message))
+          })
       }
 }
 

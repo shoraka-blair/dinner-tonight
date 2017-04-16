@@ -20,20 +20,29 @@ const recipeToListItemObj = recipe => ({
 
 //map(li, recipeToListItemObj(props.recipes))
 
-const RecipeList = (props) => {
-console.log("Do I have the recipes?", props.recipes)
-  return (
-  <div>
-    <ul className="list">
-      {
-        compose(
-          map(li),
-          map(recipeToListItemObj)
-        )(props.recipes)
+class RecipeList extends React.Component {
+    componentDidMount() {
+      fetch(`http://localhost:8082/recipes`)
+        .then(res => res.json())
+        .then(recipes => this.props.setRecipes(recipes))
       }
-    </ul>
-  </div>
+
+  render() {
+    const props = this.props
+
+  return (
+    <div>
+      <ul className="list">
+        {
+          compose(
+            map(li),
+            map(recipeToListItemObj)
+          )(props.recipes)
+        }
+      </ul>
+    </div>
   )
+}
 }
 
 
@@ -42,9 +51,20 @@ console.log("Do I have the recipes?", props.recipes)
 
 const mapStateToProps = (state) => (state)
 
+const mapActionsToProps = (dispatch) => {
+  return {
+
+  setRecipes: recipes => {
+    dispatch ({
+      type: 'SET_RECIPES', payload: recipes
+    })
+  }
+}
+}
 
 
-const connector = connect(mapStateToProps)
+
+const connector = connect(mapStateToProps, mapActionsToProps)
 
 
 export default connector(RecipeList)
