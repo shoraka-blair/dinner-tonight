@@ -10,13 +10,13 @@ import fetch from 'isomorphic-fetch'
 
 const putRecipe = (recipe) => fetch('http://localhost:8082/recipes/' + recipe._id, {
   headers: {
-    'Content-Type': 'application/json'
-  },
+    'Content-Type': 'application/json'},
   method: 'PUT',
   body: JSON.stringify(recipe)
 })
 
 class ViewRecipe extends React.Component {
+
     componentDidMount() {
       console.log('about to fetch')
 
@@ -24,6 +24,18 @@ class ViewRecipe extends React.Component {
         .then(res => res.json())
         .then(recipe => this.props.setRecipe(recipe))
   }
+
+
+  //   componentDidUpdate() {
+  //
+  //       console.log('these are the props', this.props)
+  //     fetch(`http://localhost:8082/recipes/${this.props.match.params.id}`)
+  //       .then(res => res.json())
+  //       .then(recipe => this.props.setRecipe(recipe))
+  //
+  // }
+
+
 
     render() {
       const props = this.props
@@ -69,7 +81,6 @@ console.log('this is the recipe!!!', props)
           </ul>
           <div>
             <h2>Write Review</h2>
-            <form onSubmit={props.submit(props.recipe, props.comment, props.history)}>
               <TextField
                 label="Name"
                 onChange={props.changeName}
@@ -84,9 +95,9 @@ console.log('this is the recipe!!!', props)
               <BasicButton
                 backgroundColor="light-silver"
                 color="white-80"
+                onClick={props.submit(props.comment, props.recipe, props.history)}
               >Post Review</BasicButton>
               <a className="link" href="#" onClick={e => props.history.goBack() }>Cancel</a>
-            </form>
           </div>
 
         </div>
@@ -110,7 +121,7 @@ const mapActionsToProps = (dispatch) => {
   changeComment: (e) => {
     dispatch({ type: 'SET_COMMENT_TEXT', payload: e.target.value })
   },
-  submit: (recipe, comment, history) => (e) => {
+  submit: (comment, recipe, history) => (e) => {
       e.preventDefault()
         console.log(comment)
         console.log('updated comment', append(comment, recipe.comments))
@@ -119,9 +130,10 @@ const mapActionsToProps = (dispatch) => {
         putRecipe(recipe)
           .then(res => res.json()).then(res => {
             // clear our widget memory from store
-            dispatch({ type: 'CLEAR_RECIPE'})
+            dispatch({ type: 'CLEAR_COMMENT_NAME'})
+            dispatch({ type: 'CLEAR_COMMENT_TEXT'})
             // navigate to a list view
-            history.push('/')
+            history.push('/recipes/'+recipe._id)
           })
       }
 }

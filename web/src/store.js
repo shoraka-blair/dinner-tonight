@@ -88,6 +88,10 @@ const comment = (state=initialCommentState, action) => {
       return set(lensProp('name'), action.payload, state)
     case 'SET_COMMENT_TEXT':
       return set(lensProp('text'), action.payload, state)
+    case 'CLEAR_COMMENT_NAME':
+      return ''
+    case 'CLEAR_COMMENT_TEXT':
+      return ''
     case 'CLEAR_COMMENT':
       return {}
     default:
