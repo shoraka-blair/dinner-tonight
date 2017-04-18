@@ -59,9 +59,9 @@ const initialRatingState = 0
 
 
 const recipes = (state= [], action) => {
-  console.log("XXXXX",action.payload)
       switch(action.type) {
         case 'SET_RECIPES':
+        console.log("XXXXX", action.payload)
           return action.payload
         default:
           return state

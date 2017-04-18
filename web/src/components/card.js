@@ -1,12 +1,13 @@
 import React from 'react'
 import { mean } from 'ramda'
+
+
+
 const Card = function (props) {
 
   const divStyle = {
   backgroundImage: 'url(' + props.imageUrl + ')'
 }
-
-
 
   return (
 
@@ -30,7 +31,7 @@ const Card = function (props) {
 
 Card.propTypes = {
   title: React.PropTypes.string,
-  imageUrl: React.PropTypes.jpg,
+  imageUrl: React.PropTypes.string,
   rating: React.PropTypes.array
 
 }

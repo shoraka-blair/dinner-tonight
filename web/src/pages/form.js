@@ -20,7 +20,7 @@ import {
 
 class Form extends React.Component {
 
-    componentDidMount() {
+  componentDidMount() {
         console.log('about to fetch')
           fetch(`http://localhost:8082/recipes`)
             .then(res => res.json())
@@ -39,7 +39,7 @@ class Form extends React.Component {
       linkDescription: 'View Recipe'
     })
 
-    const li = li => <ListItem key={li._id} {...li} />
+    const li = li => <ListItem key={li.id} {...li} />
 
     const props = this.props
 
@@ -54,26 +54,27 @@ class Form extends React.Component {
 
   return (
     <div className='pw4 ph1 mw6-ns center-ns'>
-      {true && (
+
       <div>
         <h2 className='red'>STEP 1</h2>
-        <CatControl value={props.control} onChange={props.changeCat} />
+        <CatControl
+          value={props.control}
+          onChange={props.changeCat}
+        />
         <h2 className='red'>STEP 2</h2>
         <CuisineControl
           value={props.cuisineControl}
           onChange={props.changeCuisine}
         />
       </div>
-          )}
 
-      {true && (
       <div>
       <h2 className='red'>SELECTED RECIPES:</h2>
         <ul className='list'>
           {map(li, recipes)}
         </ul>
       </div>
-          )}
+
     </div>
   )
 }

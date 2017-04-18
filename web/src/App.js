@@ -29,7 +29,7 @@ class App extends Component {
                     Browse
                   </Link>
                 </nav>
-                <h1 className='f4 f2-ns'>Whats For Dinner?</h1>
+                <h1 className='f4 f2-ns'>Dinner Tonight?!</h1>
                 <div className='sans-serif dn db-ns f4-ns'>
                   Use the search function to quickly find a dinner the whole family can enjoy!
                 </div>

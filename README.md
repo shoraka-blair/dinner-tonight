@@ -9,4 +9,4 @@ npm run api-install
 npm start
 ```
 
-This should start the web app on 3000 and the api app on 5000
+This should start the web app on 3000 and the api app on 8082

@@ -26,28 +26,12 @@ class ViewRecipe extends React.Component {
   }
 
 
-  //   componentDidUpdate() {
-  //
-  //       console.log('these are the props', this.props)
-  //     fetch(`http://localhost:8082/recipes/${this.props.match.params.id}`)
-  //       .then(res => res.json())
-  //       .then(recipe => this.props.setRecipe(recipe))
-  //
-  // }
-
-
-
     render() {
       const props = this.props
 
       const li = (ingredient) => <li key={li._id}>{ingredient}</li>
-      // const commentToObject = comment => ({
-      //   date: comment.date,
-      //   name: comment.author.name,
-      //   text: comment.text
-      // })
 
-console.log('this is the recipe!!!', props)
+console.log('CURRENT RECIPE!!!', props)
       return (
         <div>
           <Card
@@ -68,7 +52,7 @@ console.log('this is the recipe!!!', props)
           </div>
           <hr />
 
-          <h4>Reviews</h4>
+          <h3>Reviews</h3>
           <ul>
           {map((comment) =>
                 <li className="flex items-center lh-copy ph0-l bb b--black-10">
@@ -79,7 +63,7 @@ console.log('this is the recipe!!!', props)
             }
           </ul>
           <div>
-            <h2>Write Review</h2>
+            <h2>Write Review | Rate Recipe</h2>
               <TextField
                 label="Name"
                 type="text"
