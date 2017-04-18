@@ -27,7 +27,7 @@ const CatControl = props => {
   }
   return (
     <div>
-      <h3 className='orange'>Select Categories: {props.control}</h3>
+      <h3 className='red'>Select Categories: {props.control}</h3>
       <div className='cf'>
         <Item
           v='budget'

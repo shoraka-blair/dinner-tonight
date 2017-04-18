@@ -11,7 +11,8 @@ import {
   contains,
   equals,
   intersection,
-  allPass
+  allPass,
+  mean
 } from 'ramda'
 
 
@@ -33,7 +34,7 @@ class Form extends React.Component {
       _id: recipe._id,
       title: recipe.title,
       imageUrl: recipe.imageUrl,
-      rating: recipe.rating,
+      rating:  mean(recipe.rating).toFixed(1),
       linkUrl: '/recipes/' + recipe._id,
       linkDescription: 'View Recipe'
     })
@@ -55,19 +56,19 @@ class Form extends React.Component {
     <div className='pw4 ph1 mw6-ns center-ns'>
       {true && (
       <div>
-        <h2 className='orange'>STEP 1</h2>
+        <h2 className='red'>STEP 1</h2>
         <CatControl value={props.control} onChange={props.changeCat} />
-        <h2 className='orange'>STEP 2</h2>
+        <h2 className='red'>STEP 2</h2>
         <CuisineControl
           value={props.cuisineControl}
           onChange={props.changeCuisine}
-              />
+        />
       </div>
           )}
 
       {true && (
       <div>
-      <h2 className='orange'>SELECTED RECIPES:</h2>
+      <h2 className='red'>SELECTED RECIPES:</h2>
         <ul className='list'>
           {map(li, recipes)}
         </ul>

@@ -4,7 +4,7 @@ import { equals } from 'ramda'
 const CuisineControl = props => {
   return (
     <div>
-      <h3 className='orange'>Select Cuisine: {props.cuisineControl}</h3>
+      <h3 className='red'>Select Cuisine: {props.cuisineControl}</h3>
       <div className='cf'>
         <div
           className={`fl w-25 pointer`}
@@ -44,7 +44,7 @@ const CuisineControl = props => {
                 'bg-light-silver white b--orange'}`
             }
           >
-            <img src='/images/chinese1.jpg' />
+            <img src='/images/chinese.jpg' />
             <span className='dn db-ns'>Chinese</span>
           </div>
         </div>

@@ -55,9 +55,7 @@ const initialCommentState = {
       "text": ''
 }
 
-// const initialRatingState = {
-//       "rating": ''
-// }
+const initialRatingState = 0
 
 
 const recipes = (state= [], action) => {
@@ -99,16 +97,14 @@ const comment = (state=initialCommentState, action) => {
   }
 }
 
-// const rating = (state=initialRatingState, action) => {
-//   switch (action.type) {
-//     case 'SET_RATING':
-//       return set(lensProp('rating'), action.payload, state)
-//     case 'CLEAR_RATING':
-//       return {}
-//     default:
-//       return state
-//   }
-// }
+const rating = (state=initialRatingState, action) => {
+  switch (action.type) {
+    case 'SET_RATING':
+      return (action.payload)
+    default:
+      return state
+  }
+}
 
 
 const control = (state=[], action) => {
@@ -134,6 +130,7 @@ const store = createStore(
     recipes: recipes,
     recipe: recipe,
     comment: comment,
+    rating: rating,
     control: control,
     cuisineControl: cuisineControl
   })

@@ -9,8 +9,7 @@ const TextField = (props) => {
       </label>
       <input id={props.label}
         className={`input-reset ba b--black-20 pa2 mb2 db ${width}`}
-        type="text" aria-describedby="name-desc"
-        value={props.value}
+        type={props.type} aria-describedby="name-desc"
         onChange={props.onChange}
 
       />
@@ -21,7 +20,6 @@ const TextField = (props) => {
 
 TextField.propTypes = {
   label: React.PropTypes.string.isRequired,
-  value: React.PropTypes.string.isRequired,
   onChange: React.PropTypes.func.isRequired,
   help: React.PropTypes.string,
   optional: React.PropTypes.bool,

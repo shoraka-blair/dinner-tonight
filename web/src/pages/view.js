@@ -73,7 +73,6 @@ console.log('this is the recipe!!!', props)
           {map((comment) =>
                 <li className="flex items-center lh-copy ph0-l bb b--black-10">
                 <Comment
-                date={comment.date}
                 text={comment.text}
                 name={comment.name}
                 /></li>, props.recipe.comments)
@@ -83,19 +82,28 @@ console.log('this is the recipe!!!', props)
             <h2>Write Review</h2>
               <TextField
                 label="Name"
+                type="text"
                 onChange={props.changeName}
                 optional={false}
               />
               <TextField
                 label="Review"
+                type="text"
                 onChange={props.changeComment}
+                optional={false}
+              />
+              <TextField
+                label="Rating"
+                type="number"
+                onChange={props.changeRating}
+                help="Please rate recipe 1-5"
                 optional={false}
               />
 
               <BasicButton
                 backgroundColor="light-silver"
                 color="white-80"
-                onClick={props.submit(props.comment, props.recipe, props.history)}
+                onClick={props.submit(props.comment, props.recipe, props.rating, props.history)}
               >Post Review</BasicButton>
               <a className="link" href="#" onClick={e => props.history.goBack() }>Cancel</a>
           </div>
@@ -121,12 +129,16 @@ const mapActionsToProps = (dispatch) => {
   changeComment: (e) => {
     dispatch({ type: 'SET_COMMENT_TEXT', payload: e.target.value })
   },
-  submit: (comment, recipe, history) => (e) => {
+  changeRating: (e) => {
+    dispatch({ type: 'SET_RATING', payload: e.target.value })
+  },
+  submit: (comment, recipe, rating, history) => (e) => {
       e.preventDefault()
         console.log(comment)
         console.log('updated comment', append(comment, recipe.comments))
         // update or putWidget
         recipe.comments = append(comment, recipe.comments)
+        recipe.rating = append(Number(rating), recipe.rating)
         putRecipe(recipe)
           .then(res => res.json()).then(res => {
             // clear our widget memory from store

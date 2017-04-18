@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { map, compose } from 'ramda'
+import { map, compose, mean} from 'ramda'
 import ListItem from '../components/list-item'
 
 
@@ -8,7 +8,7 @@ const recipeToListItemObj = recipe => ({
     _id: recipe._id,
     title: recipe.title,
     imageUrl: recipe.imageUrl,
-    rating: recipe.rating,
+    rating: mean(recipe.rating).toFixed(1),
     linkUrl: '/recipes/' + recipe._id,
     linkDescription: 'View Recipe'
   })
