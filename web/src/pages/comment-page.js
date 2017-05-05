@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { pathOr } from 'ramda'
 
 
-const getWidget = (id) => fetch('http://localhost:8082/recipes/' + id)
+const getComment = (id) => fetch('http://localhost:8082/recipes/' + id)
 const putComment = (recipe) => fetch('http://localhost:8082/recipes/' + recipe.id, {
   headers: {
     'Content-Type': 'application/json'

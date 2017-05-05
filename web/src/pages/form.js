@@ -21,10 +21,8 @@ import {
 class Form extends React.Component {
 
   componentDidMount() {
-        console.log('about to fetch')
           fetch(`http://localhost:8082/recipes`)
             .then(res => res.json())
-      //      .then(res => filter(x => x.persons > 0, res))
             .then(recipes => this.props.setRecipes(recipes))
         }
 
@@ -39,7 +37,7 @@ class Form extends React.Component {
       linkDescription: 'View Recipe'
     })
 
-    const li = li => <ListItem key={li.id} {...li} />
+    const li = recipe => <ListItem key={recipe.id} {...recipe} />
 
     const props = this.props
 
@@ -99,13 +97,6 @@ const mapActionsToProps = (dispatch) => {
     })
   }
 }
-  /*getRecipes: recipe => {
-    dispatch({type: 'INIT_RECIPES', payload: recipe})
-  }*/
-
-  // getRecipes: recipe => {
-    // dispatch({ type: 'INIT_RECIPES', payload: recipe })
-  // }
  }
 
 const connector = connect(mapStateToProps, mapActionsToProps)

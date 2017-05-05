@@ -29,9 +29,8 @@ class ViewRecipe extends React.Component {
     render() {
       const props = this.props
 
-      const li = (ingredient) => <li key={li._id}>{ingredient}</li>
+      const li = (x) => <li key={x.id}>{x}</li>
 
-console.log('CURRENT RECIPE!!!', props)
       return (
         <div>
           <Card
@@ -118,9 +117,6 @@ const mapActionsToProps = (dispatch) => {
   },
   submit: (comment, recipe, rating, history) => (e) => {
       e.preventDefault()
-        console.log(comment)
-        console.log('updated comment', append(comment, recipe.comments))
-        // update or putWidget
         recipe.comments = append(comment, recipe.comments)
         recipe.rating = append(Number(rating), recipe.rating)
         putRecipe(recipe)

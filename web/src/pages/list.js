@@ -4,21 +4,6 @@ import { map, compose, mean} from 'ramda'
 import ListItem from '../components/list-item'
 
 
-const recipeToListItemObj = recipe => ({
-    _id: recipe._id,
-    title: recipe.title,
-    imageUrl: recipe.imageUrl,
-    rating: mean(recipe.rating).toFixed(1),
-    linkUrl: '/recipes/' + recipe._id,
-    linkDescription: 'View Recipe'
-  })
-
-  const li = li => <ListItem key={li.id} {...li} />
-
-
-
-
-//map(li, recipeToListItemObj(props.recipes))
 
 class RecipeList extends React.Component {
     componentDidMount() {
@@ -28,7 +13,18 @@ class RecipeList extends React.Component {
       }
 
   render() {
+
+    const recipeToListItemObj = recipe => ({
+        _id: recipe._id,
+        title: recipe.title,
+        imageUrl: recipe.imageUrl,
+        rating: mean(recipe.rating).toFixed(1),
+        linkUrl: '/recipes/' + recipe._id,
+        linkDescription: 'View Recipe'
+      })
+    const li = li => <ListItem key={li.id} {...li} />
     const props = this.props
+
 
   return (
     <div>
